@@ -36,6 +36,10 @@ The port on which Varnish will listen (typically port 80).
     varnish_secret: "14bac2e6-1e34-4770-8078-974373b76c90"
 
 The secret/key to be used for connecting to Varnish's admin backend (for purge requests, etc.).
+Generate one at https://www.uuidgenerator.net/
+or use {{ hostname | to_uuid }}
+$uuidgen
+
 
     varnish_admin_listen_host: "127.0.0.1"
     varnish_admin_listen_port: "6082"
