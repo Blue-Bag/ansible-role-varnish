@@ -9,3 +9,8 @@ backend default {
   .host = "{{ varnish_default_backend_host }}";
   .port = "{{ varnish_default_backend_port }}";
 }
+
+{% if monit_check %}
+# Include our vcl file for monit.
+include "/etc/varnish/monit.vcl";
+{% endif %}

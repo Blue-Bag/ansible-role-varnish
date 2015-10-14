@@ -75,3 +75,4 @@ MIT / BSD
 ## Author Information
 
 This role was created in 2014 by [Jeff Geerling](http://jeffgeerling.com/), author of [Ansible for DevOps](http://ansiblefordevops.com/).
+Incorporates monitoring tip from Steven Jones - see https://www.computerminds.co.uk/articles/monitoring-varnish
