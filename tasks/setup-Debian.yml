@@ -29,3 +29,13 @@
     - reload systemd
     - restart varnish
 
+# by default the varnishlog services are not running
+# so we don't want to rotate the logs if they are empty
+- name: Create logrotate entry for varnish.log
+  template:
+    src: logrotate_varnish.j2
+    dest: "/etc/logrotate.d/varnish"
+    owner: root
+    group: root
+    mode: 0644
+  sudo: true
