@@ -4,8 +4,10 @@
   missingok
   compress
   delaycompress
-  missingok
   postrotate
+  if [ -d /run/systemd/system ]; then
+    systemctl -q is-active varnishlog.service || exit 0
+  fi
   /usr/sbin/invoke-rc.d varnishlog reload > /dev/null
   endscript
   notifempty
@@ -17,8 +19,10 @@
   missingok
   compress
   delaycompress
-  missingok
   postrotate
+  if [ -d /run/systemd/system ]; then
+    systemctl -q is-active varnishlog.service || exit 0
+  fi
     /usr/sbin/invoke-rc.d varnishncsa reload > /dev/null
   endscript
   notifempty
