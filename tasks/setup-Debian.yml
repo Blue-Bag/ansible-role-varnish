@@ -38,4 +38,4 @@
     owner: root
     group: root
     mode: 0644
-  sudo: true
+  become: true
