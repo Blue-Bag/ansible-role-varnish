@@ -24,7 +24,8 @@ varnish_malloc: '256M'
 varnish_storage: "file,/var/lib/varnish/varnish_storage.bin,{{ varnish_malloc }}"
 # varnish_storage: "malloc,{{ varnish_malloc }}"
 
-
+varnish_enabled_services:
+  - varnish
 
 monit_check: false
 monit_check_url: "monit-check-url-qwertyuiop"
