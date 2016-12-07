@@ -15,6 +15,11 @@
     path: "{{ varnish_config_path }}"
     state: directory
 
+- name: Debug
+  debug:
+    var: varnish_default_vcl_template_path
+    verbosity: 4
+
 - name: Copy Varnish default VCL.
   template:
     src: "{{ varnish_default_vcl_template_path }}"
