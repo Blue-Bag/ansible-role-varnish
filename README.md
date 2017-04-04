@@ -72,6 +72,10 @@ None.
 
 MIT / BSD
 
+## Notes:
+
+see https://twitter.com/MoritzBunkus/status/834149922010255360
+
 ## Author Information
 
 This role was created in 2014 by [Jeff Geerling](http://jeffgeerling.com/), author of [Ansible for DevOps](http://ansiblefordevops.com/).

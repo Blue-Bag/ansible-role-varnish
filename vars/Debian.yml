@@ -1,5 +1,5 @@
 ---
 
 varnish_sysvinit_config_path: /etc/default
-# geerlingguy has - /etc/systemd/system
-varnish_systemd_config_path: /lib/systemd/system
+# Dont  put it in /lib/systemd/system as it gets overridden
+varnish_systemd_config_path: /etc/systemd/system
