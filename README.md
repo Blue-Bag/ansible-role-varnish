@@ -74,6 +74,8 @@ MIT / BSD
 
 ## Notes:
 
+Updated as per instruction at https://packagecloud.io/varnishcache/varnish41/install#manual
+
 see https://twitter.com/MoritzBunkus/status/834149922010255360
 
 ## Author Information
