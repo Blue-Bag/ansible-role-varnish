@@ -14,7 +14,7 @@
   apt_repository:
     repo: "{{ item }}"
     state: present
-  with_items: "varnish_repos"
+  with_items: "{{ varnish_repos }}"
 
 
 - name: Install Varnish.
