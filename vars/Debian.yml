@@ -9,7 +9,9 @@ varnish_required_packages:
   - apt-transport-https
 
 varnish_repos:
-  - deb https://packagecloud.io/varnishcache/{{varnish_v_path}}/{{ ansible_distribution | lower}}/ {{ ansible_distribution_release }} main
-  - deb-src https://packagecloud.io/varnishcache/{{varnish_v_path}}/{{ ansible_distribution | lower}}/ {{ ansible_distribution_release }} main
+  - deb https://packagecloud.io/varnishcache/varnish{{varnish_v_path}}/{{ ansible_distribution | lower}}/ {{ ansible_distribution_release }} main
+  - deb-src https://packagecloud.io/varnishcache/varnish{{varnish_v_path}}/{{ ansible_distribution | lower}}/ {{ ansible_distribution_release }} main
 
+#     deb https://packagecloud.io/varnishcache/varnish41/ubuntu/ trusty main
+# deb-src https://packagecloud.io/varnishcache/varnish41/ubuntu/ trusty main
   # deb http://repo.varnish-cache.org/ubuntu {{ ansible_distribution_release }} varnish-4.0
