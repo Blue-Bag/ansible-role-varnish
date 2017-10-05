@@ -3,7 +3,7 @@ varnish_package_name: "varnish"
 varnish_version: "4.1"
 varnish_v_path: "{{ varnish_version|replace('.', '') }}"
 
-varnish_gpg_key: 'https://packagecloud.io/varnishcache/{{varnish_v_path}}/gpgkey'
+varnish_gpg_key: 'https://packagecloud.io/varnishcache/varnish{{varnish_v_path}}/gpgkey'
 # prev: http://repo.varnish-cache.org/debian/GPG-key.txt
 
 varnish_use_default_vcl: true
