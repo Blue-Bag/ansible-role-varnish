@@ -33,3 +33,9 @@ varnish_enabled_services:
 
 monit_check: false
 monit_check_url: "monit-check-url-qwertyuiop"
+
+# extra params to add to the pre start
+varnish_vcl_execstartpre_params: ''
+
+# extra params to add to the start
+varnish_vcl_extra_params: ''
