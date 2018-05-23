@@ -18,7 +18,7 @@
 
 
 - name: Install Varnish.
-  apt: name=varnish state=installed
+  apt: name=varnish state=present
 
 - name: Copy Varnish configuration.
   template:
