@@ -3,7 +3,7 @@
 - name: Ensure required packages are installed
   package:
     name: "{{ item }}"
-    state: installed
+    state: present
   with_items: "{{varnish_required_packages}}"
 
 
