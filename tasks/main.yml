@@ -1,4 +1,9 @@
 ---
+
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
+
+
 - include: setup-RedHat.yml
   when: ansible_os_family == 'RedHat'
 
@@ -10,10 +15,15 @@
     path: "{{ varnish_config_path }}"
     state: directory
 
+- name: Debug
+  debug:
+    var: varnish_default_vcl_template_path
+    verbosity: 4
+
 - name: Copy Varnish default VCL.
   template:
     src: "{{ varnish_default_vcl_template_path }}"
-    dest: "{{ varnish_config_path }}/default.vcl"
+    dest: "{{ varnish_config_path }}/{{ varnish_default_vcl }}"
     owner: root
     group: root
     mode: 0644
@@ -24,6 +34,15 @@
   template:
     src: secret.j2
     dest: "{{ varnish_config_path }}/secret"
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart varnish
+
+- name: Copy varnish monit vcl.
+  template:
+    src: monit.vcl.j2
+    dest: "{{ varnish_config_path }}/monit.vcl"
     owner: root
     group: root
     mode: 0644

@@ -1,19 +1,51 @@
 ---
+
+- name: Ensure required packages are installed
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{varnish_required_packages}}"
+
+
 - name: Add Varnish apt key.
-  apt_key: url=http://repo.varnish-cache.org/debian/GPG-key.txt state=present
+  apt_key: url="{{varnish_gpg_key}}" state=present
 
 - name: Add Varnish apt repository.
   apt_repository:
-    repo: "deb http://repo.varnish-cache.org/ubuntu {{ ansible_distribution_release }} varnish-4.0"
+    repo: "{{ item }}"
     state: present
+  with_items: "{{ varnish_repos }}"
+
 
 - name: Install Varnish.
-  apt: name=varnish state=installed
+  apt: name=varnish state=present
 
 - name: Copy Varnish configuration.
   template:
     src: varnish.j2
-    dest: /etc/default/varnish
+    dest: "{{ varnish_sysvinit_config_path }}/varnish"
     owner: root
     group: root
-    mode: 0755
+    mode: 0644
+
+- name: Update systemd configuration
+  template:
+    src: varnish.service.j2
+    dest: "{{varnish_systemd_config_path}}/varnish.service"
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - reload systemd
+    - restart varnish
+
+# by default the varnishlog services are not running
+# so we don't want to rotate the logs if they are empty
+- name: Create logrotate entry for varnish.log
+  template:
+    src: logrotate_varnish.j2
+    dest: "/etc/logrotate.d/varnish"
+    owner: root
+    group: root
+    mode: 0644
+  become: true
