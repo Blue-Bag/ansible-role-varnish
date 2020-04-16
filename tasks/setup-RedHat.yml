@@ -9,7 +9,7 @@
 - name: Install Varnish.
   yum:
     name: varnish
-    state: installed
+    state: present
     enablerepo: "varnish-4.0,epel"
     disablerepo: "*"
 
