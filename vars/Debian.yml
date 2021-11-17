@@ -7,6 +7,7 @@ varnish_systemd_config_path: /etc/systemd/system
 varnish_required_packages:
   - debian-archive-keyring
   - apt-transport-https
+  - gnupg2
 
 varnish_repos:
   - deb https://packagecloud.io/varnishcache/varnish{{varnish_v_path}}/{{ ansible_distribution | lower}}/ {{ ansible_distribution_release }} main
