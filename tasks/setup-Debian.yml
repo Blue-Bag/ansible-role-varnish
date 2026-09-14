@@ -9,7 +9,10 @@
 
 
     - name: Add Varnish apt key.
-      apt_key: url="{{varnish_gpg_key}}" state=present
+      ansible.builtin.get_url:
+        url: "{{ varnish_gpg_key }}"
+        dest: /etc/apt/trusted.gpg.d/varnish.asc
+        mode: "0644"
 
     - name: Add Varnish apt repository.
       apt_repository:
