@@ -1,14 +1,14 @@
 ---
 
 - name: Include OS-specific variables.
-  include_vars: "{{ ansible_os_family }}.yml"
+  include_vars: "{{ ansible_facts['os_family'] }}.yml"
 
 
-- include: setup-RedHat.yml
-  when: ansible_os_family == 'RedHat'
+- include_tasks: setup-RedHat.yml
+  when: ansible_facts['os_family'] == 'RedHat'
 
-- include: setup-Debian.yml
-  when: ansible_os_family == 'Debian'
+- include_tasks: setup-Debian.yml
+  when: ansible_facts['os_family'] == 'Debian'
 
 - name: Ensure Varnish config path exists.
   file:
@@ -18,7 +18,13 @@
 - name: Debug
   debug:
     var: varnish_default_vcl_template_path
-    verbosity: 4
+    verbosity: 1
+
+
+- name: Debug
+  debug:
+    var: varnish_allowed_purgers
+    verbosity: 1    
 
 - name: Copy Varnish default VCL.
   template:
@@ -29,6 +35,7 @@
     mode: 0644
   when: varnish_use_default_vcl
   notify: restart varnish
+
 
 - name: Copy varnish secret.
   template:

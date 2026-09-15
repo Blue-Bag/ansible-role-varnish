@@ -1,6 +1,6 @@
 ---
 varnish_package_name: "varnish"
-varnish_version: "4.1"
+varnish_version: "6.4"
 varnish_v_path: "{{ varnish_version|replace('.', '') }}"
 
 varnish_gpg_key: 'https://packagecloud.io/varnishcache/varnish{{varnish_v_path}}/gpgkey'

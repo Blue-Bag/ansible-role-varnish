@@ -1,21 +1,26 @@
 ---
 
-- name: Ensure required packages are installed
-  package:
-    name: "{{ item }}"
-    state: present
-  with_items: "{{varnish_required_packages}}"
+- block:
+    - name: Ensure required packages are installed
+      package:
+        name: "{{ item }}"
+        state: present
+      with_items: "{{varnish_required_packages}}"
 
 
-- name: Add Varnish apt key.
-  apt_key: url="{{varnish_gpg_key}}" state=present
+    - name: Add Varnish apt key.
+      ansible.builtin.get_url:
+        url: "{{ varnish_gpg_key }}"
+        dest: /etc/apt/trusted.gpg.d/varnish.asc
+        mode: "0644"
 
-- name: Add Varnish apt repository.
-  apt_repository:
-    repo: "{{ item }}"
-    state: present
-  with_items: "{{ varnish_repos }}"
+    - name: Add Varnish apt repository.
+      apt_repository:
+        repo: "{{ item }}"
+        state: present
+      with_items: "{{ varnish_repos }}"
 
+  when: ansible_distribution == 'Debian' and ansible_lsb.major_release|int < 11
 
 - name: Install Varnish.
   apt: name=varnish state=present
