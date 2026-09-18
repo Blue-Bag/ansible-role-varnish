@@ -8,17 +8,31 @@
       with_items: "{{varnish_required_packages}}"
 
 
+    - name: Install repository management dependencies
+      ansible.builtin.apt:
+        name: python3-debian
+        state: present
+
     - name: Add Varnish apt key.
       ansible.builtin.get_url:
         url: "{{ varnish_gpg_key }}"
         dest: /etc/apt/trusted.gpg.d/varnish.asc
         mode: "0644"
 
+    - name: Remove legacy Varnish apt repository list file.
+      ansible.builtin.file:
+        path: /etc/apt/sources.list.d/varnish.list
+        state: absent
+
     - name: Add Varnish apt repository.
-      apt_repository:
-        repo: "{{ item }}"
+      ansible.builtin.deb822_repository:
+        name: varnish
+        types: "{{ varnish_repo_types }}"
+        uris: "{{ varnish_repo_uri }}"
+        suites: "{{ ansible_distribution_release }}"
+        components: main
+        signed_by: /etc/apt/trusted.gpg.d/varnish.asc
         state: present
-      with_items: "{{ varnish_repos }}"
 
   when: ansible_distribution == 'Debian' and ansible_lsb.major_release|int < 11
 

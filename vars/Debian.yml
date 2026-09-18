@@ -9,9 +9,10 @@ varnish_required_packages:
   - apt-transport-https
   - gnupg2
 
-varnish_repos:
-  - deb https://packagecloud.io/varnishcache/varnish{{varnish_v_path}}/{{ ansible_distribution | lower}}/ {{ ansible_distribution_release }} main
-  - deb-src https://packagecloud.io/varnishcache/varnish{{varnish_v_path}}/{{ ansible_distribution | lower}}/ {{ ansible_distribution_release }} main
+varnish_repo_uri: "https://packagecloud.io/varnishcache/varnish{{varnish_v_path}}/{{ ansible_distribution | lower}}/"
+varnish_repo_types:
+  - deb
+  - deb-src
 
 #     deb https://packagecloud.io/varnishcache/varnish41/ubuntu/ trusty main
 # deb-src https://packagecloud.io/varnishcache/varnish41/ubuntu/ trusty main
